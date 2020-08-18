@@ -1,5 +1,5 @@
 # Code Examples
-_Author: Kate Tyshchenko_
+_Author: Kate Tyshchenko_. 
 _Personal website: https://ktyshchenko.github.io/_
 
 This repo contains examples of the code from my personal projects for the purpose of demonstrating programming skills.  
