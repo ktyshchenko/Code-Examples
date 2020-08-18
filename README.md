@@ -18,7 +18,8 @@ If you would like to see full repo, please contact me (it is currently a private
 - Power-up for stunning the enemies
 - Three difficulty levels
 - Sound effects and animations
-###### Features of v2.0:
+
+##### Features of v2.0:
 - Two different types of enemies
 - Lives and power-ups to restore them
 - High score
