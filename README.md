@@ -1,5 +1,5 @@
 # Code Examples
-_Author: Kate Tyshchenko_. 
+_Author: Kate Tyshchenko_  
 
 _Personal website: https://ktyshchenko.github.io/_
 
