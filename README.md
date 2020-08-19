@@ -4,7 +4,7 @@ _Author: Kate Tyshchenko_
 _Personal website: https://ktyshchenko.github.io/_
 
 ### Purpose
-This repo contains scripts from my personal project Defend the Town! for the purpose of demonstrating programming skills.  
+This repo contains scripts from my personal project Defend the Town!.  
 If you would like to see full repo, please contact me (it is currently a private repo on Bitbucket).  
 
 ### About the project
