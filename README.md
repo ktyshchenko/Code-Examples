@@ -24,4 +24,7 @@ If you would like to see full repo, please contact me (it is currently a private
 - Two different types of enemies
 - Lives and multiple power-ups to restore them
 - High score
-- Power-ups for immunity and stunning the enemies
+- Power-ups for immunity and stunning the enemies  
+
+##### Features added in v3.0 (in progress):
+- Options (change volume, pause game, exit game)
