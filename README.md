@@ -1,6 +1,5 @@
 # Defend the Town! Scripts
 _Author: Kate Tyshchenko_  
-
 _Personal website: https://ktyshchenko.github.io/_
 
 ### Purpose
@@ -9,9 +8,9 @@ If you would like to see full repo, please contact me (it is currently a private
 
 ### About the project
 - A 3D game where you defend a medieval town from enemies. Power-ups are available!
-- v1.0 found [here](https://connect.unity.com/mg/other/defend-the-town)
-- v2.0 found [here](https://connect.unity.com/mg/other/defend-the-town-v2-0) 
-- v3.0 is in progress
+  - v1.0 found [here](https://connect.unity.com/mg/other/defend-the-town)
+  - v2.0 found [here](https://connect.unity.com/mg/other/defend-the-town-v2-0) 
+  - v3.0 is in progress
 
 ##### Features of v1.0:
 - One type of enemy
