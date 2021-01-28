@@ -28,3 +28,5 @@ If you would like to see full repo, please contact me (it is currently a private
 
 ##### Features added in v3.0 (in progress):
 - Options (change volume, pause game, exit game)
+- Three levels
+- New power-up which removes all enemies currently in the scene
