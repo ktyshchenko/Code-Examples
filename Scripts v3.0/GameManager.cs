@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     private Text scoreText;
     public int highScore;
     private Text highScoreText;
+    public int level = 1;
+    private Text levelText;
+
+    public static bool wasShown = false;
 
     public GameObject[] hearts;
 
@@ -44,16 +48,18 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        StartGame();
-
         scoreText = GameObject.Find("Score Text").GetComponent<Text>();
         highScoreText = GameObject.Find("High Score Text").GetComponent<Text>();
+        levelText = GameObject.Find("Level Text").GetComponent<Text>();
+
         livesAudio = GetComponent<AudioSource>();
         AudioListener.volume = audioVolumeSlider.value;
 
         pauseButton = GameObject.Find("Pause Button");
         resumeButton = GameObject.Find("Resume Button");
         pauseText = GameObject.Find("Pause Screen Text").GetComponent<TextMeshProUGUI>();
+
+        StartGame();
     }
 
     // Update is called once per frame
@@ -62,6 +68,7 @@ public class GameManager : MonoBehaviour
         CapLives();
         CalculateHearts();
         ShowScore();
+        ShowLevel();
         GameOver();
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -138,6 +145,38 @@ public class GameManager : MonoBehaviour
         highScoreText.text = "High Score: " + highScore.ToString();
     }
 
+    private void ShowLevel()
+    {
+        if (score == 0 && isGameActive)
+        {
+            if (!wasShown)
+            {
+                level = 1;
+                StartCoroutine(levelCoroutine());
+            }
+        }
+        else if (SpawnManager.waveNumber == SpawnManager.levelTwoWave && isGameActive)
+        {
+            if (!wasShown)
+            {
+                level++;
+                StartCoroutine(levelCoroutine());
+            }
+        }
+        else if (SpawnManager.waveNumber == SpawnManager.levelThreeWave && isGameActive)
+        {
+            if (!wasShown)
+            {
+                level++;
+                StartCoroutine(levelCoroutine());
+            }
+        }
+        else
+        {
+            wasShown = false;
+        }
+    }
+
     public void GameOver()
     {
         if (isGameOver)
@@ -196,6 +235,20 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
 
         GameOver();
+    }
+
+    IEnumerator levelCoroutine()
+    {
+        wasShown = true;
+
+        levelText.text = "Level: " + level.ToString();
+
+        levelText.enabled = true;
+
+        var delay = new WaitForSeconds(2.0f);
+        yield return delay;
+
+        levelText.enabled = false;
     }
 }
 
