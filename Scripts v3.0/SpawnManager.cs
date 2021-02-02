@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
     private float waitTime = 10.0f;
 
     public static int waveNumber;
-    public int enemyCount;
+    public static int enemyCount;
 
     private const float xRange = 4.0f; // left or right road bounds
     private const float zTopRange = 20.0f; // front of the road bound
@@ -23,7 +23,8 @@ public class SpawnManager : MonoBehaviour
     private float spawnPosZ;
     private Vector3 portalLoc;
 
-    private int levelTwoScore = 50;
+    public static int levelTwoWave = 11; // wave at which player is at lvl 2
+    public static int levelThreeWave = 21; // wave at which player is at lvl 3
 
     // Start is called before the first frame update
     private void Start()
@@ -51,14 +52,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        // Spawn a power-up fully restoring health with every X points
-        // Don't spawn if previous one is not collected
-        float scoreForRestore = GameManager.score % levelTwoScore;
-        if (GameManager.score != 0 && scoreForRestore == 0f && isSpawned == false)
-        {
-            SpawnPowerUp(powerUpRestore);
-            isSpawned = true;
-        }
+        SpawnPowerUpRestore();
     }
 
     private void SpawnEnemyWave(int enemiesToSpawn)
@@ -87,7 +81,11 @@ public class SpawnManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(spawnPosX, 0f, spawnPosZ);
 
         // Spawn the enemies at a random loc at the portal
-        if (GameManager.score >= levelTwoScore)
+        if (waveNumber >= levelThreeWave)
+        {
+            ActivateEnemy(1, spawnPos); // only enhanced trolls appear
+        }
+        else if (waveNumber >= levelTwoWave)
         {
             ActivateEnemy(enemyIndex, spawnPos); // both enhanced and normal-sized trolls appear randomly
         }
@@ -108,6 +106,23 @@ public class SpawnManager : MonoBehaviour
 
             // Spawn a power-up at a random loc
             Instantiate(powerUpPrefabs[index], spawnPos, Quaternion.identity);
+        }
+    }
+
+    private void SpawnPowerUpRestore()
+    {
+        // Spawn a power-up fully restoring health with every level
+        // Don't spawn if previous one is not collected
+        if (GameManager.score != 0 && (waveNumber == levelTwoWave || waveNumber == levelThreeWave) && isSpawned == false)
+        {
+            SpawnPowerUp(powerUpRestore);
+            isSpawned = true;
+        }
+
+        // Reset the power-up so that it spawns at the next level
+        if (waveNumber > levelTwoWave && waveNumber < levelThreeWave)
+        {
+            isSpawned = false;
         }
     }
 

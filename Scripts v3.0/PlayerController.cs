@@ -177,7 +177,6 @@ public class PlayerController : MonoBehaviour
             {
                 // Restore all lives
                 GameManager.livesLeft = GameManager.livesFull;
-                SpawnManager.isSpawned = false;
             }
             else if (other.gameObject.name.Contains("Stun"))
             {
