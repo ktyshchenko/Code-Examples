@@ -13,7 +13,7 @@ public class ObjectPooling : MonoBehaviour
     public List<GameObject> enemiesPooled;
     public List<GameObject> enemiesEnhancedPooled;
     public GameObject[] enemiesToPool;
-    public int enemyAmountToPool = 50;
+    public int enemyAmountToPool = 100;
     private EnemyHealth enemyHealthScript;
 
     private void Awake()
