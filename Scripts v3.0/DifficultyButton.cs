@@ -32,14 +32,14 @@ public class DifficultyButton : MonoBehaviour
 
     private void SetDifficulty()
     {
-        gameManager.StartGame();
-
         // Reset the variables for each game
         SpawnManager.waveNumber = 0;
         TrollController.movementSpeed = SetSpeed(difficultyLevel);
         GameManager.isGameActive = true;
 
         gameManager.titleScreen.gameObject.SetActive(false);
+
+        gameManager.StartGame();
     }
 
     private float SetSpeed(Difficulty difficultySelection)
