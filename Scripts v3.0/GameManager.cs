@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public static bool wasShown = false;
 
     public GameObject[] hearts;
+    public GameObject destructor;
 
     public static bool isGameActive = false;
     public GameObject titleScreen;
@@ -39,6 +40,8 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI pauseText;
 
     private bool isPaused = false;
+
+    public static bool isDestructorAvailable = true;
 
     private void Awake()
     {
@@ -67,6 +70,7 @@ public class GameManager : MonoBehaviour
     {
         CapLives();
         CalculateHearts();
+        CalculateDestructor();
         ShowScore();
         ShowLevel();
         GameOver();
@@ -128,6 +132,19 @@ public class GameManager : MonoBehaviour
             {
                 hearts[i].GetComponent<Show>().show = false;
             }
+        }
+    }
+
+    private void CalculateDestructor()
+    {
+        // If destructor is available, show the icon on screen
+        if (isDestructorAvailable)
+        {
+            destructor.GetComponent<Show>().show = true;
+        }
+        else
+        {
+            destructor.GetComponent<Show>().show = false;
         }
     }
 
@@ -244,6 +261,8 @@ public class GameManager : MonoBehaviour
         levelText.text = "Level: " + level.ToString();
 
         levelText.enabled = true;
+
+        isDestructorAvailable = true;
 
         var delay = new WaitForSeconds(2.0f);
         yield return delay;

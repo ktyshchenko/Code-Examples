@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public AudioClip destroyerSound;
     public AudioClip enemyDestroyedSound;
     public AudioClip enemyWoundedSound;
     private AudioSource collisionAudio;
     private float audioVolume = 1.0f;
 
     private Renderer enemyRenderer;
+    private GameObject destructionParticles;
 
     public float enemyHealth;
     public float enemyHealthMax;
@@ -20,9 +22,37 @@ public class EnemyHealth : MonoBehaviour
     {
         collisionAudio = GetComponent<AudioSource>();
         enemyRenderer = GetComponent<MeshRenderer>();
+        destructionParticles = transform.Find("DestructionParticles").gameObject;
 
         enemyHealth = enemyHealthMax;
         healthBar.value = CalculateHealth();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) && GameManager.isDestructorAvailable)
+        {
+            activateDestroyer();
+        }
+    }
+
+    private void activateDestroyer()
+    {
+        StartCoroutine(enemyDeactivate());
+
+        IEnumerator enemyDeactivate()
+        {
+            collisionAudio.PlayOneShot(destroyerSound, audioVolume);
+            GameManager.score++;
+            destructionParticles.SetActive(true);
+
+            yield return new WaitForSeconds(destroyerSound.length);
+
+            destructionParticles.SetActive(false);
+            gameObject.SetActive(false);
+
+            GameManager.isDestructorAvailable = false; // can only use destructor once (till available again)
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,7 +64,7 @@ public class EnemyHealth : MonoBehaviour
                 enemyHealth--;
                 healthBar.value = CalculateHealth();
 
-                StartCoroutine(enemyDeactivate());
+                StartCoroutine(enemyDeactivate()); // NB: version of the one above
 
                 IEnumerator enemyDeactivate()
                 {
@@ -64,6 +94,7 @@ public class EnemyHealth : MonoBehaviour
             enemyHealth = 0f;
 
             gameObject.SetActive(false);
+
             GameManager.score++;
         }
     }
