@@ -32,11 +32,11 @@ public class EnemyHealth : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return) && GameManager.isDestructorAvailable)
         {
-            activateDestroyer();
+            ActivateDestroyer();
         }
     }
 
-    private void activateDestroyer()
+    private void ActivateDestroyer()
     {
         StartCoroutine(enemyDeactivate());
 
